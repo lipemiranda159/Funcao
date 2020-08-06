@@ -43,23 +43,29 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                
-                model.Id = _boCliente.Incluir(new Cliente()
-                {                    
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
-                });
 
-           
+                model.Id = _boCliente.Incluir(GetClienteByModel(model));
+
+
                 return Json("Cadastro efetuado com sucesso");
             }
+        }
+
+        private static Cliente GetClienteByModel(ClienteModel model)
+        {
+            return new Cliente()
+            {
+                CEP = model.CEP,
+                Cidade = model.Cidade,
+                Email = model.Email,
+                Estado = model.Estado,
+                Logradouro = model.Logradouro,
+                Nacionalidade = model.Nacionalidade,
+                Nome = model.Nome,
+                Sobrenome = model.Sobrenome,
+                Telefone = model.Telefone,
+                CPF = model.CPF
+            };
         }
 
         [HttpPost]
@@ -78,19 +84,9 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                _boCliente.Alterar(new Cliente()
-                {
-                    Id = model.Id,
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
-                });
+                var cliente = GetClienteByModel(model);
+                cliente.Id = model.Id;
+                _boCliente.Alterar(cliente);
                                
                 return Json("Cadastro alterado com sucesso");
             }
@@ -116,7 +112,8 @@ namespace WebAtividadeEntrevista.Controllers
                     Nacionalidade = cliente.Nacionalidade,
                     Nome = cliente.Nome,
                     Sobrenome = cliente.Sobrenome,
-                    Telefone = cliente.Telefone
+                    Telefone = cliente.Telefone,
+                    CPF = cliente.CPF
                 };
 
             
