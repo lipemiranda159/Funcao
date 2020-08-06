@@ -10,6 +10,13 @@ namespace WebAtividadeEntrevista.Controllers
 {
     public class ClienteController : Controller
     {
+        private readonly BoCliente _boCliente;
+
+        public ClienteController(BoCliente boCliente)
+        {
+            _boCliente = boCliente;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -24,7 +31,6 @@ namespace WebAtividadeEntrevista.Controllers
         [HttpPost]
         public JsonResult Incluir(ClienteModel model)
         {
-            BoCliente bo = new BoCliente();
             
             if (!this.ModelState.IsValid)
             {
@@ -38,7 +44,7 @@ namespace WebAtividadeEntrevista.Controllers
             else
             {
                 
-                model.Id = bo.Incluir(new Cliente()
+                model.Id = _boCliente.Incluir(new Cliente()
                 {                    
                     CEP = model.CEP,
                     Cidade = model.Cidade,
@@ -72,7 +78,7 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                bo.Alterar(new Cliente()
+                _boCliente.Alterar(new Cliente()
                 {
                     Id = model.Id,
                     CEP = model.CEP,
@@ -135,7 +141,7 @@ namespace WebAtividadeEntrevista.Controllers
                 if (array.Length > 1)
                     crescente = array[1];
 
-                List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
+                List<Cliente> clientes = _boCliente.Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
 
                 //Return result to jTable
                 return Json(new { Result = "OK", Records = clientes, TotalRecordCount = qtd });
