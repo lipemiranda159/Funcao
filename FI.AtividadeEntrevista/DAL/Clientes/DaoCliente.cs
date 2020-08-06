@@ -25,6 +25,7 @@ namespace FI.AtividadeEntrevista.DAL
             {
                 new SqlParameter(Constants.PARAMETER_NAME, cliente.Nome),
                 new SqlParameter(Constants.PARAMETER_SOBRENOME, cliente.Sobrenome),
+                new SqlParameter(Constants.PARAMETER_CPF, cliente.CPF),
                 new SqlParameter(Constants.PARAMETER_NACIONALIDADE, cliente.Nacionalidade),
                 new SqlParameter(Constants.PARAMETER_CEP, cliente.CEP),
                 new SqlParameter(Constants.PARAMETER_ESTADO, cliente.Estado),
@@ -63,13 +64,17 @@ namespace FI.AtividadeEntrevista.DAL
         /// <param name="cliente">Objeto de cliente</param>
         internal long Incluir(Cliente cliente)
         {
-            List<SqlParameter> parametros = GetClientDataParameters(cliente);
-
-            var ds = Consultar(Constants.INSERT_CLIENT_SP, parametros);
             long ret = 0;
-            if (PossuiRegistros(ds, default))
-                long.TryParse(GetDatabaseValue(ds, default), out ret);
+            if (!VerificarExistencia(cliente.CPF))
+            {
+                List<SqlParameter> parametros = GetClientDataParameters(cliente);
+
+                var ds = Consultar(Constants.INSERT_CLIENT_SP, parametros);
+                if (PossuiRegistros(ds, default))
+                    long.TryParse(GetDatabaseValue(ds, default), out ret);
+            }
             return ret;
+
         }
 
 
@@ -149,9 +154,12 @@ namespace FI.AtividadeEntrevista.DAL
         /// <param name="cliente">Objeto de cliente</param>
         internal void Alterar(Cliente cliente)
         {
-            var parametros = GetClientDataParameters(cliente);
-            parametros.Add(new SqlParameter(Constants.PARAMETER_ID, cliente.Id));
-            Executar(Constants.CHANGE_CLIENT_SP, parametros);
+            if (!VerificarExistencia(cliente.CPF))
+            {
+                var parametros = GetClientDataParameters(cliente);
+                parametros.Add(new SqlParameter(Constants.PARAMETER_ID, cliente.Id));
+                Executar(Constants.CHANGE_CLIENT_SP, parametros);
+            }
         }
 
 
