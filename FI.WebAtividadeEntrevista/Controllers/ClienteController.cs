@@ -130,7 +130,7 @@ namespace WebAtividadeEntrevista.Controllers
         {
             try
             {
-                int qtd = 0;
+                var qtd = 0;
                 string campo = string.Empty;
                 string crescente = string.Empty;
                 string[] array = jtSorting.Split(' ');
