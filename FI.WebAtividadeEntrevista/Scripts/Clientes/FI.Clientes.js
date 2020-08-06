@@ -26,7 +26,7 @@ $(document).ready(function () {
             },
             success:
             function (r) {
-                ModalDialog("Sucesso!", r)
+                ModalDialog("Sucesso!", r);
                 $("#formCadastro")[0].reset();
             }
         });
@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 function ModalDialog(titulo, texto) {
     var random = Math.random().toString().replace('.', '');
-    var texto = '<div id="' + random + '" class="modal fade">                                                               ' +
+    const texto = '<div id="' + random + '" class="modal fade">                                                               ' +
         '        <div class="modal-dialog">                                                                                 ' +
         '            <div class="modal-content">                                                                            ' +
         '                <div class="modal-header">                                                                         ' +
