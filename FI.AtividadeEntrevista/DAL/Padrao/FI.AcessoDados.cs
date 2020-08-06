@@ -11,64 +11,68 @@ namespace FI.AtividadeEntrevista.DAL
 {
     internal class AcessoDados
     {
+        private const string CONNECTION_NAME = "BancoDeDados";
+
         private string stringDeConexao
         {
             get
             {
-                ConnectionStringSettings conn = System.Configuration.ConfigurationManager.ConnectionStrings["BancoDeDados"];
-                if (conn != null)
-                    return conn.ConnectionString;
-                else
-                    return string.Empty;
+                var conn = ConfigurationManager.ConnectionStrings[CONNECTION_NAME];
+                var connectionString = conn != null ? conn.ConnectionString : string.Empty;
+                return connectionString;
             }
         }
 
         internal void Executar(string NomeProcedure, List<SqlParameter> parametros)
         {
-            SqlCommand comando = new SqlCommand();
-            SqlConnection conexao = new SqlConnection(stringDeConexao);
-            comando.Connection = conexao;
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = NomeProcedure;
-            foreach (var item in parametros)
-                comando.Parameters.Add(item);
+            using (var comando = new SqlCommand())
+            {
+                var conexao = new SqlConnection(stringDeConexao);
+                comando.Connection = conexao;
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.CommandText = NomeProcedure;
+                foreach (var item in parametros)
+                    comando.Parameters.Add(item);
 
-            conexao.Open();
-            try
-            {
-                comando.ExecuteNonQuery();
-            }
-            finally
-            {
-                conexao.Close();
+                conexao.Open();
+                try
+                {
+                    comando.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conexao.Close();
+                }
             }
         }
 
         internal DataSet Consultar(string NomeProcedure, List<SqlParameter> parametros)
         {
-            SqlCommand comando = new SqlCommand();
-            SqlConnection conexao = new SqlConnection(stringDeConexao);
+            var comando = new SqlCommand();
+            var conexao = new SqlConnection(stringDeConexao);
 
             comando.Connection = conexao;
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandType = CommandType.StoredProcedure;
             comando.CommandText = NomeProcedure;
             foreach (var item in parametros)
                 comando.Parameters.Add(item);
 
-            SqlDataAdapter adapter = new SqlDataAdapter(comando);
-            DataSet ds = new DataSet();
-            conexao.Open();
-
-            try
-            {               
-                adapter.Fill(ds);
-            }
-            finally
+            using (SqlDataAdapter adapter = new SqlDataAdapter(comando))
             {
-                conexao.Close();
+                var ds = new DataSet();
+                conexao.Open();
+
+                try
+                {
+                    adapter.Fill(ds);
+                }
+                finally
+                {
+                    conexao.Close();
+                }
+                return ds;
             }
 
-            return ds;
         }
 
     }
