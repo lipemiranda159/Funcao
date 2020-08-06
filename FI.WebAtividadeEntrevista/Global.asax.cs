@@ -26,11 +26,10 @@ namespace WebAtividadeEntrevista
 
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
-            var boClient = new BoCliente();
-            container.RegisterInstance(boClient);
-            container.RegisterInstance(new HomeController());
-            container.RegisterInstance(new ClienteController(boClient));
-            container.RegisterInstance(new ValuesController());
+            container.Register<BoCliente>(Lifestyle.Scoped);
+            container.Register<HomeController>(Lifestyle.Scoped);
+            container.Register<ClienteController>(Lifestyle.Scoped);
+            container.Register<ValuesController>(Lifestyle.Scoped);
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
     }
