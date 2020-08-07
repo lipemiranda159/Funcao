@@ -35,7 +35,7 @@ namespace FI.AtividadeEntrevista.DAL
             {
                 List<SqlParameter> parametros = GetBeneficiarioDataParameters(beneficiario);
 
-                var ds = Consultar(Constants.BENEFICIARIO_INSERT_CLIENT_SP, parametros);
+                var ds = Consultar(Constants.BENEFICIARIO_INSERT_SP, parametros);
                 if (PossuiRegistros(ds, default))
                     long.TryParse(GetDatabaseValue(ds, default), out ret);
             }
@@ -60,7 +60,7 @@ namespace FI.AtividadeEntrevista.DAL
                 new SqlParameter(Constants.BENEFICIARIO_PARAMETER_ID, Id)
             };
 
-            var ds = Consultar(Constants.BENEFICIARIO_SEARCH_CLIENT_SP, parametros);
+            var ds = Consultar(Constants.BENEFICIARIO_SEARCH_SP, parametros);
             var ben = Converter(ds);
 
             return ben.FirstOrDefault();
@@ -73,7 +73,7 @@ namespace FI.AtividadeEntrevista.DAL
                 new SqlParameter(Constants.BENEFICIARIO_PARAMETER_CPF, CPF)
             };
 
-            var ds = Consultar(Constants.BENEFICIARIO_VERIFY_CLIENT_SP, parametros);
+            var ds = Consultar(Constants.BENEFICIARIO_VERIFY_SP, parametros);
 
             return PossuiRegistros(ds, default);
         }
@@ -112,9 +112,9 @@ namespace FI.AtividadeEntrevista.DAL
                 new SqlParameter(Constants.BENEFICIARIO_PARAMETER_ID, 0)
             };
 
-            var ds = Consultar(Constants.SEARCH_BENEFICIARIO_SP, parametros);
+            var ds = Consultar(Constants.BENEFICIARIO_SEARCH_SP, parametros);
 
-            return Converter(ds); 
+            return Converter(ds);
         }
 
         /// <summary>
@@ -161,4 +161,4 @@ namespace FI.AtividadeEntrevista.DAL
         }
     }
 }
-}
+

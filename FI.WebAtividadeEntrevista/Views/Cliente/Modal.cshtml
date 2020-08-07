@@ -1,0 +1,39 @@
+﻿@model WebAtividadeEntrevista.Models.BeneficiarioModel
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Beneficiários</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formBeneficiario" action="~/Beneficiario/Incluir" role="form" method="post">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ModalNome">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="ModalNome" name="ModalNome" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ModalCPF">CPF:</label>
+                                <input required="required" type="text" class="form-control" id="ModalCPF" name="ModalCPF" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-4 button-center" style="height:13vh;">
+                            <button type="button" class="btn btn-success" onclick="document.forms[1].submit()">Incluir</button>
+                        </div>
+                    </div>
+                </form>
+                <table id="gridBeneficiarios" class="table"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

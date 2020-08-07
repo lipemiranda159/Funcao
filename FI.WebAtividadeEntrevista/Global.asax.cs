@@ -2,10 +2,6 @@
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -27,8 +23,10 @@ namespace WebAtividadeEntrevista
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
             container.Register<BoCliente>(Lifestyle.Scoped);
+            container.Register<BoBeneficiario>(Lifestyle.Scoped);
             container.Register<HomeController>(Lifestyle.Scoped);
             container.Register<ClienteController>(Lifestyle.Scoped);
+            container.Register<BeneficiarioController>(Lifestyle.Scoped);
             container.Register<ValuesController>(Lifestyle.Scoped);
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
