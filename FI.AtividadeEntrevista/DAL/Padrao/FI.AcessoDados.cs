@@ -23,6 +23,17 @@ namespace FI.AtividadeEntrevista.DAL
             }
         }
 
+        internal string GetDatabaseValue(DataSet ds, int position)
+        {
+            return ds.Tables[position].Rows[0][0].ToString();
+        }
+
+        internal bool PossuiRegistros(DataSet ds, int position)
+        {
+            return ds.Tables.Count > 0 && ds.Tables[position].Rows.Count > 0;
+        }
+
+
         internal void Executar(string NomeProcedure, List<SqlParameter> parametros)
         {
             using (var comando = new SqlCommand())

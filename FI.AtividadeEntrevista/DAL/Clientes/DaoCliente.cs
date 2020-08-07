@@ -21,40 +21,18 @@ namespace FI.AtividadeEntrevista.DAL
         {
             return new List<SqlParameter>
             {
-                new SqlParameter(Constants.PARAMETER_NAME, cliente.Nome),
-                new SqlParameter(Constants.PARAMETER_SOBRENOME, cliente.Sobrenome),
-                new SqlParameter(Constants.PARAMETER_CPF, cliente.CPF),
-                new SqlParameter(Constants.PARAMETER_NACIONALIDADE, cliente.Nacionalidade),
-                new SqlParameter(Constants.PARAMETER_CEP, cliente.CEP),
-                new SqlParameter(Constants.PARAMETER_ESTADO, cliente.Estado),
-                new SqlParameter(Constants.PARAMETER_CIDADE, cliente.Cidade),
-                new SqlParameter(Constants.PARAMETER_LOGRADOURO, cliente.Logradouro),
-                new SqlParameter(Constants.PARAMETER_EMAIL, cliente.Email),
-                new SqlParameter(Constants.PARAMETER_TELEFONE, cliente.Telefone)
+                new SqlParameter(Constants.CLIENTE_PARAMETER_NAME, cliente.Nome),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_SOBRENOME, cliente.Sobrenome),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_CPF, cliente.CPF),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_NACIONALIDADE, cliente.Nacionalidade),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_CEP, cliente.CEP),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_ESTADO, cliente.Estado),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_CIDADE, cliente.Cidade),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_LOGRADOURO, cliente.Logradouro),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_EMAIL, cliente.Email),
+                new SqlParameter(Constants.CLIENTE_PARAMETER_TELEFONE, cliente.Telefone)
             };
         }
-        /// <summary>
-        /// Pega valor da tabela
-        /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        private static string GetDatabaseValue(DataSet ds, int position)
-        {
-            return ds.Tables[position].Rows[0][0].ToString();
-        }
-
-        /// <summary>
-        /// Verifica se existe registro
-        /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        private static bool PossuiRegistros(DataSet ds, int position)
-        {
-            return ds.Tables.Count > 0 && ds.Tables[position].Rows.Count > 0;
-        }
-
 
         /// <summary>
         /// Inclui um novo cliente
@@ -89,7 +67,7 @@ namespace FI.AtividadeEntrevista.DAL
         {
             var parametros = new List<SqlParameter>
             {
-                new SqlParameter(Constants.PARAMETER_ID, Id)
+                new SqlParameter(Constants.CLIENTE_PARAMETER_ID, Id)
             };
 
             var ds = Consultar(Constants.SEARCH_CLIENT_SP, parametros);
@@ -102,7 +80,7 @@ namespace FI.AtividadeEntrevista.DAL
         {
             var parametros = new List<SqlParameter>
             {
-                new SqlParameter(Constants.PARAMETER_CPF, CPF)
+                new SqlParameter(Constants.CLIENTE_PARAMETER_CPF, CPF)
             };
 
             var ds = Consultar(Constants.VERIFY_CLIENT_SP, parametros);
@@ -141,7 +119,7 @@ namespace FI.AtividadeEntrevista.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>
             {
-                new SqlParameter(Constants.PARAMETER_ID, 0)
+                new SqlParameter(Constants.CLIENTE_PARAMETER_ID, 0)
             };
 
             DataSet ds = Consultar(Constants.SEARCH_CLIENT_SP, parametros);
@@ -159,7 +137,7 @@ namespace FI.AtividadeEntrevista.DAL
             if (!VerificarExistencia(cliente.CPF))
             {
                 var parametros = GetClientDataParameters(cliente);
-                parametros.Add(new SqlParameter(Constants.PARAMETER_ID, cliente.Id));
+                parametros.Add(new SqlParameter(Constants.CLIENTE_PARAMETER_ID, cliente.Id));
                 Executar(Constants.CHANGE_CLIENT_SP, parametros);
             }
         }
@@ -173,7 +151,7 @@ namespace FI.AtividadeEntrevista.DAL
         {
             List<SqlParameter> parametros = new List<SqlParameter>
             {
-                new SqlParameter(Constants.PARAMETER_ID, Id)
+                new SqlParameter(Constants.CLIENTE_PARAMETER_ID, Id)
             };
 
             Executar(Constants.DELETE_CLIENT_SP, parametros);

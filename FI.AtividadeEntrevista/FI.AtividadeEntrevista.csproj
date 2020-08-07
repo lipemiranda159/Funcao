@@ -61,11 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BoBeneficiario.cs" />
     <Compile Include="BLL\BoCliente.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DAL\Beneficiario\DaoBeneficiario.cs" />
     <Compile Include="DAL\Clientes\DaoCliente.cs" />
-    <Compile Include="DAL\Clientes\DaoClienteExtension.cs" />
+    <Compile Include="DAL\Padrao\DaoExtension.cs" />
     <Compile Include="DAL\Padrao\FI.AcessoDados.cs" />
+    <Compile Include="DML\Beneficiario.cs" />
     <Compile Include="DML\Cliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +96,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DAL\Beneficiario\Procedures\FI_SP_AltBenef.sql" />
+    <Content Include="DAL\Beneficiario\Procedures\FI_SP_ConsBenef.sql" />
+    <Content Include="DAL\Beneficiario\Procedures\FI_SP_DelBenef.sql" />
+    <Content Include="DAL\Beneficiario\Procedures\FI_SP_IncBenef.sql" />
+    <Content Include="DAL\Beneficiario\Procedures\FI_SP_PesqBenef.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
