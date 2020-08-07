@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FI.AtividadeEntrevista.DML;
+using FI.Utils.Exceptions;
 
 namespace FI.AtividadeEntrevista.DAL
 {
@@ -54,7 +55,7 @@ namespace FI.AtividadeEntrevista.DAL
         /// <returns></returns>
         private static bool PossuiRegistros(DataSet ds, int position)
         {
-            return ds.Tables.Count > 1 && ds.Tables[position].Rows.Count > 0;
+            return ds.Tables.Count > 0 && ds.Tables[position].Rows.Count > 0;
         }
 
 
@@ -72,6 +73,10 @@ namespace FI.AtividadeEntrevista.DAL
                 var ds = Consultar(Constants.INSERT_CLIENT_SP, parametros);
                 if (PossuiRegistros(ds, default))
                     long.TryParse(GetDatabaseValue(ds, default), out ret);
+            }
+            else
+            {
+                throw new CpfJaExisteException("CPF já existe na base de dados!");
             }
             return ret;
 
