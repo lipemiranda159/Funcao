@@ -17,7 +17,8 @@ public static class DaoClientExtension
             Nacionalidade = row.Field<string>(Constants.PARAMETER_NACIONALIDADE),
             Nome = row.Field<string>(Constants.PARAMETER_NAME),
             Sobrenome = row.Field<string>(Constants.PARAMETER_SOBRENOME),
-            Telefone = row.Field<string>(Constants.PARAMETER_TELEFONE)
+            Telefone = row.Field<string>(Constants.PARAMETER_TELEFONE),
+            CPF = row.Field<string>(Constants.PARAMETER_CPF)
         };
     }   
      

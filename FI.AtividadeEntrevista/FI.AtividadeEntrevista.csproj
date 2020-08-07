@@ -76,7 +76,12 @@
     <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_AltCliente.sql" />
     <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_IncCliente.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FI.Utils\FI.Utils.csproj">
+      <Project>{F68962B3-9E2B-4DF4-96BD-C10F553CC5E9}</Project>
+      <Name>FI.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
