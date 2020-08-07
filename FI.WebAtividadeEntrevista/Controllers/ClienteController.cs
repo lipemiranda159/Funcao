@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using FI.AtividadeEntrevista.DML;
+using FI.Utils.Exceptions;
 
 namespace WebAtividadeEntrevista.Controllers
 {
@@ -44,10 +45,16 @@ namespace WebAtividadeEntrevista.Controllers
             else
             {
 
-                model.Id = _boCliente.Incluir(GetClienteByModel(model));
-
-
-                return Json("Cadastro efetuado com sucesso");
+                try
+                {
+                    model.Id = _boCliente.Incluir(GetClienteByModel(model));
+                    return Json("Cadastro efetuado com sucesso");
+                }
+                catch (CpfJaExisteException ex)
+                {
+                    Response.StatusCode = 400;
+                    return Json(ex.Message);
+                }
             }
         }
 
