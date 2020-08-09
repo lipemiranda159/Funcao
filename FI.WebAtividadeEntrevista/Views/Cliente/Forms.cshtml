@@ -1,16 +1,19 @@
-﻿
-<form id="formCadastro" method="post">
+﻿@model WebAtividadeEntrevista.Models.FormModel
+@using WebAtividadeEntrevista.Models
+
+@using (Html.BeginForm("Incluir", "Cliente", FormMethod.Post))
+{
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="Nome">Nome:</label>
-                <input required="required" type="text" class="form-control" id="Nome" name="Nome" placeholder="Ex.: João" maxlength="50">
+                @Html.LabelFor(m => m.Nome, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="Sobrenome">Sobrenome:</label>
-                <input required="required" type="text" class="form-control" id="Sobrenome" name="Sobrenome" placeholder="Ex.: da Silva" maxlength="255">
+                @Html.LabelFor(m => m.Sobrenome, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Sobrenome, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
@@ -18,14 +21,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="CPF">CPF:</label>
-                <input required="required" type="text" class="form-control" id="CPF" name="CPF" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                @Html.LabelFor(m => m.CPF, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.CPF, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="Nacionalidade">Nacionalidade:</label>
-                <input required="required" type="text" class="form-control" id="Nacionalidade" name="Nacionalidade" placeholder="Ex.: brasileira" maxlength="50">
+                @Html.LabelFor(m => m.Nacionalidade, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Nacionalidade, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
@@ -33,24 +36,24 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="CEP">CEP:</label>
-                <input required="required" type="text" class="form-control" id="CEP" name="CEP" placeholder="Ex.: 01011-100" maxlength="9">
+                @Html.LabelFor(m => m.CEP, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.CEP, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="Estado">Estado:</label>
-                <select required="required" id="Estado" class="form-control" name="Estado">
-                    <option value="">Selecione</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="PE">Pernambuco</option>
-                </select>
+                @Html.LabelFor(m => m.Estado, new { htmlAttributes = new { @class = "" } })
+
+                @Html.DropDownList("Estado",
+                    new SelectList(Enum.GetNames(typeof(StateEnum))),
+                    "Estado",
+                     new { @class = "form-control" })
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="Cidade">Cidade:</label>
-                <input required="required" type="text" class="form-control" id="Cidade" name="Cidade" maxlength="50" placeholder="Ex.: São Paulo">
+                @Html.LabelFor(m => m.Cidade, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Cidade, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
     </div>
@@ -58,8 +61,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="Logradouro">Logradouro:</label>
-                <input required="required" type="text" class="form-control" id="Logradouro" name="Logradouro" placeholder="Ex.: Rua Boa Vista 253" maxlength="500">
+                @Html.LabelFor(m => m.Cidade, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Cidade, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
     </div>
@@ -67,14 +70,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="Email">E-mail:</label>
-                <input required="required" type="text" class="form-control" id="Email" name="Email" placeholder="Ex.: email@email.com" maxlength="2079">
+                @Html.LabelFor(m => m.Email, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="Telefone">Telefone:</label>
-                <input required="required" type="tel" class="form-control" id="Telefone" name="Telefone" placeholder="Ex.: (11) 2020-3030" maxlength="15">
+                @Html.LabelFor(m => m.Telefone, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(m => m.Telefone, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
     </div>
@@ -82,14 +85,14 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="pull-right">
-                <button type="submit" class="btn btn-sm btn-success">Salvar</button>
+                <button type="submit" id="btnIncluirCliente" class="btn btn-sm btn-success">Salvar</button>
                 @Html.ActionLink("Voltar", "Index", "Cliente", new { }, new { @class = "btn btn-sm btn-danger" })
             </div>
         </div>
     </div>
 
 
-</form>
+}
 
 @section scripts{
     <script>
@@ -100,3 +103,42 @@
     @Scripts.Render("~/bundles/listBeneficiarios")
 }
 
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Beneficiários</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formCadastro" method="post">
+
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ModalNome">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="ModalNome" name="ModalNome" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ModalCPF">CPF:</label>
+                                <input required="required" type="text" class="form-control" id="ModalCPF" name="ModalCPF" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-4 button-center" style="height:13vh;">
+                            <button type="submit" class="btn btn-success" id="btnIncluirBenef">Incluir</button>
+                        </div>
+                    </div>
+                </form>
+                <table id="gridBeneficiarios" class="table"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

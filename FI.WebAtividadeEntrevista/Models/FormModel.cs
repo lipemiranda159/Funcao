@@ -10,16 +10,20 @@ namespace WebAtividadeEntrevista.Models
     /// <summary>
     /// Classe de Modelo de Cliente
     /// </summary>
-    public class ClienteModel
+    public class FormModel
     {
         public long Id { get; set; }
+
+        public long ModalId { get; set; }
+        /// <summary>
+        /// CPF
+        /// </summary>
+        public string CPF { get; set; }
 
         /// <summary>
         /// CPF
         /// </summary>
-        [Required]
-        [CpfCustomValidator(ErrorMessage = "Digite um cpf válido!")]
-        public string CPF { get; set; }
+        public string ModalCPF { get; set; }
 
 
         /// <summary>
@@ -64,6 +68,13 @@ namespace WebAtividadeEntrevista.Models
         /// </summary>
         [Required]
         public string Nome { get; set; }
+
+        /// <summary>
+        /// Nome
+        /// </summary>
+        [Required]
+        public string ModalNome { get; set; }
+
 
         /// <summary>
         /// Sobrenome

@@ -19,7 +19,7 @@ namespace WebAtividadeEntrevista.Controllers
         }
 
         [HttpPost]
-        public JsonResult Incluir(BeneficiarioModel model)
+        public JsonResult Incluir(FormModel model)
         {
 
             if (!this.ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace WebAtividadeEntrevista.Controllers
             }
         }
 
-        private static Beneficiario GetBeneficiarioByModel(BeneficiarioModel model)
+        private static Beneficiario GetBeneficiarioByModel(FormModel model)
         {
             return new Beneficiario()
             {
@@ -57,7 +57,7 @@ namespace WebAtividadeEntrevista.Controllers
         }
 
         [HttpPost]
-        public JsonResult Alterar(BeneficiarioModel model)
+        public JsonResult Alterar(FormModel model)
         {
             var bo = new BoBeneficiario();
 

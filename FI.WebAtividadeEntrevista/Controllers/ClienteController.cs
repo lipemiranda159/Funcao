@@ -30,7 +30,7 @@ namespace WebAtividadeEntrevista.Controllers
         }
 
         [HttpPost]
-        public JsonResult Incluir(ClienteModel model)
+        public JsonResult Incluir(FormModel model)
         {
             
             if (!this.ModelState.IsValid)
@@ -58,7 +58,7 @@ namespace WebAtividadeEntrevista.Controllers
             }
         }
 
-        private static Cliente GetClienteByModel(ClienteModel model)
+        private static Cliente GetClienteByModel(FormModel model)
         {
             return new Cliente()
             {
@@ -76,7 +76,7 @@ namespace WebAtividadeEntrevista.Controllers
         }
 
         [HttpPost]
-        public JsonResult Alterar(ClienteModel model)
+        public JsonResult Alterar(FormModel model)
         {
             BoCliente bo = new BoCliente();
        
@@ -104,11 +104,11 @@ namespace WebAtividadeEntrevista.Controllers
         {
             BoCliente bo = new BoCliente();
             Cliente cliente = bo.Consultar(id);
-            Models.ClienteModel model = null;
+            Models.FormModel model = null;
 
             if (cliente != null)
             {
-                model = new ClienteModel()
+                model = new FormModel()
                 {
                     Id = cliente.Id,
                     CEP = cliente.CEP,
